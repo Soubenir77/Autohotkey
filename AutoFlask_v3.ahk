@@ -1,4 +1,4 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
@@ -19,10 +19,7 @@ Setup:
 MsgBox, 0,, Set Default Flask Keys In Game...
 ifMsgBox OK
 {
-FileDelete, flask.ini
-FileDelete, timer.ini
-FileDelete, health.ini
-FileDelete, mana.ini
+FileDelete, settings.ini
 }
 
 Tooltip, Press Z Over Health to get Health Trigger..., 1,1
@@ -42,12 +39,12 @@ MouseGetPos, XXM, YYM
 PixelGetColor, VarM, %XXM%, %YYM%, RGB
 }
 
-Iniwrite, %VarH%, health.ini, Colortone
-Iniwrite, %XX%, health.ini, XPosition
-Iniwrite, %YY%, health.ini, YPosition
-iniWrite, %VarM%, mana.ini, ColortoneM
-iniwrite, %XXM%, mana.ini, XMPosition
-iniwrite, %YYM%, mana.ini, YMPosition
+Iniwrite, %VarH%, settings.ini, Colortone
+Iniwrite, %XX%, settings.ini, XPosition
+Iniwrite, %YY%, settings.ini, YPosition
+iniWrite, %VarM%, settings.ini, ColortoneM
+iniwrite, %XXM%, settings.ini, XMPosition
+iniwrite, %YYM%, settings.ini, YMPosition
 
 Gui, Add, Text,, Choose Wisely...
 Gui, Add, Text,, (Setup Flasks Trigger)
@@ -56,13 +53,13 @@ Gui, Add, Checkbox,  checked vFlask2,  Set HP As Trigger?(flask2)
 Gui, Add, Checkbox,  checked vFlask3,  Set HP As Trigger?(flask3)
 Gui, Add, Checkbox,  checked vFlask4,  Set HP As Trigger?(flask4)
 Gui, Add, Checkbox,  checked vFlask5,  Set HP As Trigger?(flask5)
-Gui, Add, Text,, (Flask Duration in miliseconds)
+Gui, Add, Text,, (Flask Delay On Trigger in miliseconds)
 Gui, Add, Edit, vTimer1, Flask1Duration
 Gui, Add, Edit, vTimer2, Flask2Duration
 Gui, Add, Edit, vTimer3, Flask3Duration
 Gui, Add, Edit, vTimer4, Flask4Duration
 Gui, Add, Edit, vTimer5, Flask5Duration
-Gui, Add, Text,, ( Script Interval in miliseconds)
+Gui, Add, Text,, ( Script  Refresh Interval in miliseconds)
 Gui, Add, Edit, vTimer,  ScriptRefreshTimer
 Gui, Add, Button, gLabel, Save
 Gui, Show, Autosize Center
@@ -70,43 +67,42 @@ return
 
 Label:
 Gui, Submit, NoHide
-IniWrite, %Flask1%, flask.ini, FlaskOne, Value
-IniWrite, %Flask2%, flask.ini, FlaskTwo, Value
-IniWrite, %Flask3%, flask.ini, FlaskThree, Value
-iniWrite, %Flask4%, flask.ini, FlaskFour, Value
-Iniwrite, %Flask5%, flask.ini, FlaskFive, Value
-IniWrite, %Timer1%, timer.ini, TimerOne, Value
-IniWrite, %Timer2%, timer.ini, TimerTwo, Value
-IniWrite, %Timer3%, timer.ini, TimerThree, Value
-IniWrite, %Timer4%, timer.ini, TimerFour, Value
-IniWrite, %TImer5%, timer.ini, TimerFive, Value
-IniWrite, %Timer%, timer.ini, TimerSleep, Value
+IniWrite, %Flask1%, settings.ini, FlaskOne, Value
+IniWrite, %Flask2%, settings.ini, FlaskTwo, Value
+IniWrite, %Flask3%, settings.ini, FlaskThree, Value
+iniWrite, %Flask4%, settings.ini, FlaskFour, Value
+Iniwrite, %Flask5%, settings.ini, FlaskFive, Value
+IniWrite, %Timer1%, settings.ini, TimerOne, Value
+IniWrite, %Timer2%, settings.ini, TimerTwo, Value
+IniWrite, %Timer3%, settings.ini, TimerThree, Value
+IniWrite, %Timer4%, settings.ini, TimerFour, Value
+IniWrite, %TImer5%, settings.ini, TimerFive, Value
+IniWrite, %Timer%, settings.ini, TimerSleep, Value
 Gui, Destroy
 GoTo, Execute
 Return
 
 Execute:
-IniRead, FlaskOne, flask.ini, FlaskOne, Value
-IniRead, FlaskTwo, flask.ini, FlaskTwo, Value
-IniRead, FlaskThree, flask.ini, FlaskThree, Value
-iniRead, FlaskFour, flask.ini, FlaskFour, Value
-IniRead, FlaskFive, flask.ini, FlaskFive, Value
-IniRead, Mana, mana.ini, ColortoneM
-IniRead, Mana_posX, mana.ini, XMPosition
-IniRead, Mana_posY, mana.ini, YMPosition
-IniRead, Health, health.ini, Colortone
-IniRead, Health_posX, health.ini, XPosition
-IniRead, Health_posY, health.ini, YPosition
-IniRead, tf1, timer.ini, TimerOne, Value
-iniread, tf2, timer.ini, TimerTwo, Value
-iniread, tf3, timer.ini, TimerThree, Value
-iniread, tf4, timer.ini, TimerFour, Value
-iniread, tf5, timer.ini, TimerFive, Value
-iniread, t, timer.ini, TimerSleep, Value
+IniRead, FlaskOne, settings.ini, FlaskOne, Value
+IniRead, FlaskTwo, settings.ini, FlaskTwo, Value
+IniRead, FlaskThree, settings.ini, FlaskThree, Value
+iniRead, FlaskFour, setttings.ini, FlaskFour, Value
+IniRead, FlaskFive, settings.ini, FlaskFive, Value
+IniRead, Mana, settings.ini, ColortoneM
+IniRead, Mana_posX, settings.ini, XMPosition
+IniRead, Mana_posY, settings.ini, YMPosition
+IniRead, Health, settings.ini, Colortone
+IniRead, Health_posX, settings.ini, XPosition
+IniRead, Health_posY, settings.ini, YPosition
+IniRead, tf1, settings.ini, TimerOne, Value
+iniread, tf2, settings.ini, TimerTwo, Value
+iniread, tf3, settings.ini, TimerThree, Value
+iniread, tf4, settings.ini, TimerFour, Value
+iniread, tf5, settings.ini, TimerFive, Value
+iniread, t, settings.ini, TimerSleep, Value
 
 Loop
 {
-WatchDog:
 PixelGetColor, CMS, %Mana_posX%, %Mana_posY%, RGB
 if (CMS = Mana)
 {
