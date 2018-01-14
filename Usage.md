@@ -13,10 +13,10 @@ Tooltip popping will remind you of this
 Next a window will launch that will ask you to set the following
 Flasks 1 to 5 are asiggned by default to be used on HP Trigger,thus the checked checkboxes on the window
 If you wish a flask to fire on MP Trigger just uncheck the box
-The Flask Duration is reccomended to be set according to the real flask duration so that the script wont over press keys
-For example if your flask has duration of 7 seconds set the value to 7000
+The Flask Sleep Timer is how many miliseconds the script will wait when a flask it is pressed
+For example if your flask has duration of 7 seconds set the value to 200-300ms
 The ScriptIntervalTimer is essential cause it tells the script how often to check for HP and MP changes
-It is reccomended to set it to a value between 1000-5000 ms
+It is reccomended to set it to a value between 100-500 ms
 After Setup is completed all the settings are saved in ini files
 So you dont have to run setup every time you start the script
 It will remember your settings
