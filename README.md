@@ -1,7 +1,9 @@
 # hut6  
 
-Only works for 64b Steam client at the moment
-Will add offsets for 64b global client as soon as i can find time to redo calcs
+Hut6 is an autopot script written in Autohotkey
+For the time being only supports Steam Version of Path of Exile at 64bit
+I will add support for global client in feature releases
+
 
 
 
